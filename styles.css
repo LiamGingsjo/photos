@@ -1,0 +1,381 @@
+/* Importera Inter-fonten från Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+:root {
+    --primary: #CBA6F7;
+    --text: #CDD6F4;
+    --float-element: rgba(30, 30, 46, 0.69);
+    --background: #313244;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Flytande toppmeny */
+.float-bar {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    background: var(--float-element);
+    z-index: 1000;
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+}
+
+.float-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+}
+
+.float-bar-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.float-bar-title h1 {
+    height: 33px;
+    font-size: 2rem;
+    line-height: 33px;
+    margin: 0;
+}
+
+/* Gör float-bar-titeln klickbar utan länk-stil */
+.float-bar-home-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+.float-bar-home-link h1 {
+    margin: 0;
+    color: var(--primary);
+    transition: color 0.2s;
+}
+.float-bar-home-link:hover h1,
+.float-bar-home-link:focus h1 {
+    color: var(--text);
+}
+
+/* Navigationsmeny */
+.float-bar-nav ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0; padding: 0;
+}
+
+.float-bar-nav ul a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    height: 23px;
+    font-size: 1.15rem;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+}
+
+.float-bar-nav ul a:hover {
+    color: var(--primary);
+}
+
+/* Mobilanpassning för float bar */
+@media (max-width: 600px) {
+    .float-bar-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        padding: 0.5rem 0.5rem;
+        max-width: 100vw;
+    }
+    .float-bar-title {
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    .float-bar-title h1 {
+        font-size: 1.3rem;
+        height: auto;
+        line-height: 1.2;
+    }
+    .float-bar-title .logo {
+        max-height: 28px;
+        width: auto;
+    }
+    .float-bar-nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .float-bar-nav ul {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    .float-bar-nav ul a {
+        font-size: 1rem;
+        height: 20px;
+        line-height: 20px;
+        padding: 0 2px;
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+/* Bakgrundsbild med blur */
+.background-blur {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: url('brand/Background.png') center/cover no-repeat;
+    filter: blur(15px);
+    opacity: 0.7;
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Album-layout */
+.album-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: calc(4 * 300px + 3 * 32px);
+    margin: 0 auto;
+    position: relative;
+}
+
+.album-tile {
+    display: flex;
+    width: 300px;
+    padding-bottom: 22px;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+    background: var(--float-element);
+    border-radius: 24px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    transition: box-shadow 0.25s, outline-width 0.4s, outline-color 0.4s;
+    outline: 0 solid var(--primary);
+}
+
+/* Lyft upp album-tile vid hover */
+.album-tile:hover,
+.album-tile:focus-within {
+    box-shadow: 0 24px 96px 0 rgba(203,166,247,0.25), 0 8px 32px 0 rgba(0,0,0,0.35);
+    outline-width: 6px;
+    outline-color: var(--primary);
+    outline-style: solid;
+    outline-offset: 0;
+}
+
+/* Visa outline endast på hover/fokus */
+@supports selector(:has(*)) {
+    .album-container:has(.album-tile:hover) .album-tile:not(:hover),
+    .album-container:has(.album-tile:focus-within) .album-tile:not(:focus-within) {
+        outline-width: 0;
+    }
+}
+
+.album-tile img {
+    max-width: 300px;
+    max-height: 225px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 24px 24px 0 0;
+    padding-bottom: 10px;
+}
+
+.album-tile h3 {
+    font-size: 2rem;
+    line-height: 31px;
+    height: 31px;
+    color: var(--text);
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ta bort länkstil i album-tile */
+.album-tile a {
+    text-decoration: none;
+    color: inherit;
+    cursor: default;
+}
+
+/* Stil för "Rädda mig!"-knappen på 404-sidan */
+.rescue-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    background: var(--primary);
+    color: #1a1527;
+    font-size: 1.15rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 16px;
+    text-decoration: none;
+    box-shadow: 0 2px 12px rgba(203,166,247,0.15);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-align: center;
+}
+.rescue-btn:hover,
+.rescue-btn:focus {
+    background: #a48bdc;
+    color: #fff;
+    box-shadow: 0 4px 24px rgba(203,166,247,0.25);
+}
+
+/* Footer */
+footer {
+    position: relative;
+    z-index: 1;
+    background: var(--background);
+    color: var(--text);
+    width: 100%;
+    opacity: 1;
+    padding: 2rem 0 1.5rem 0;
+    margin-top: 2.5rem;
+}
+
+/* Footer-layout med flex */
+.footer-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    overflow-x: visible;
+}
+
+.footer-column-1,
+.footer-column-2,
+.footer-column-3,
+.footer-column-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 180px;
+    gap: 0.5rem;
+    flex: 1 1 0;
+    box-sizing: border-box;
+}
+
+/* Samma rubrikstil för alla kolumner */
+.footer-column-1 h1,
+.footer-column-2 h1,
+.footer-column-3 h1,
+.footer-column-4 h1 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Copyright-rutor i footer */
+.footer-column-4 .footer-copyright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.footer-column-4 .footer-copyright > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.1rem;
+    color: var(--text);
+    gap: 0.1rem;
+}
+
+.footer-column-4 .footer-copyright > div > div:first-child {
+    font-weight: 500;
+}
+
+.footer-column-4 .footer-copyright > div > div:last-child {
+    font-size: 1rem;
+    color: var(--primary);
+    font-weight: 400;
+}
+
+/* Separator mellan kolumner */
+.footer-column-separator {
+    width: 2px;
+    min-height: 120px;
+    background: var(--float-element);
+    border-radius: 1px;
+    align-self: stretch;
+    margin: 0 0.5rem;
+}
+
+/* Listor i footer */
+.footer-column-2 ul,
+.footer-column-3 ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column-2 li,
+.footer-column-3 li {
+    margin: 0.25rem 0;
+}
+
+.footer-column-2 a,
+.footer-column-3 a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-column-2 a:hover,
+.footer-column-3 a:hover {
+    color: var(--text);
+}
+
+/* Responsiv footer för mindre skärmar */
+@media (max-width: 900px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    .footer-column-separator {
+        display: none;
+    }
+    .footer-column-1,
+    .footer-column-2,
+    .footer-column-3,
+    .footer-column-4 {
+        min-width: 0;
+        width: 100%;
+        max-width: 400px;
+    }
+}
